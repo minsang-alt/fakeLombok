@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+group = 'me.evo'
+version = '1.0-SNAPSHOT'
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+
+    /**
+     * Java API의 기능 확장을 목표로하는 인기 있고 모든 기능을 갖춘 유틸리티 클래스 패키지
+     * StringUtils 클래스를 사용해서 첫 번째 문자를 제목 대/소문자로 변경하는 문자열을 대문자로 바꿉니다.
+     * Use the StringUtils class to capitalize a string that changes the first character to the title case.
+     */
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+
+    /**
+     * 어노테이션 프로세서를 구현하고 빌드를 할때 먼저 어노테이션프로세서 구현체를 빌드해야하는데 의존성 순서대로 빌드하도록 귀찮은 작업을 줄여주는 라이브러리 입니다.
+     * When implementing and building an annotation processor, you need to build the annotation processor implementation first, but this library saves you the trouble of building it in dependency order.
+     */
+    compileOnly group: 'com.google.auto.service', name: 'auto-service', version: '1.1.1'
+    annotationProcessor group: 'com.google.auto.service', name: 'auto-service', version: '1.1.1'
+
+    /**
+     * 현재 자바 1.8에는 tools 패키지를 애플리케이션에 포함되지 않도록 하였습니다.하지만 AST조작 클래스를 사용하기 위해서는 꼭 써야하기 때문에 경로를 설정하여 tools패키지를 가져오도록 했습니다.
+     * In Java 1.8, the tools package is not included in the application, but we need it to use the AST manipulation classes, so we set the path to get the tools package.
+     */
+    compileOnly files("${System.getProperty('java.home')}/../lib/tools.jar")
+
+
+}
+test {
+    useJUnitPlatform()
+}

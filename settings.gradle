@@ -1,0 +1,4 @@
+rootProject.name = 'evoLombok'
+include 'annotation'
+include 'app'
+
